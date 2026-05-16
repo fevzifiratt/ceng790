@@ -3,54 +3,52 @@
 [info] loading project definition from /home/firat/IdeaProjects/CENG790/project
 [info] loading settings for project ceng790 from build.sbt...
 [info] set current project to AIEcosystemClustering (in build file:/home/firat/IdeaProjects/CENG790/)
-[info] compiling 1 Scala source to /home/firat/IdeaProjects/CENG790/target/scala-2.12/classes ...
-[info] done compiling
-[info] running (fork) divide.Main 
+[info] running (fork) ecosystem.Main 
 [error] Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
-[error] 26/05/16 13:16:26 WARN Utils: Your hostname, pardus resolves to a loopback address: 127.0.1.1; using 144.122.176.232 instead (on interface wlp3s0)
-[error] 26/05/16 13:16:26 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+[error] 26/05/16 14:27:22 WARN Utils: Your hostname, pardus resolves to a loopback address: 127.0.1.1; using 144.122.176.232 instead (on interface wlp3s0)
+[error] 26/05/16 14:27:22 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
 [error] WARNING: An illegal reflective access operation has occurred
-[error] WARNING: Illegal reflective access by org.apache.spark.unsafe.Platform (file:/home/firat/IdeaProjects/CENG790/target/bg-jobs/sbt_b089e933/target/c0c711a9/3c33e6aa/spark-unsafe_2.12-3.2.4.jar) to constructor java.nio.DirectByteBuffer(long,int)
+[error] WARNING: Illegal reflective access by org.apache.spark.unsafe.Platform (file:/home/firat/IdeaProjects/CENG790/target/bg-jobs/sbt_e8235afd/target/c0c711a9/3c33e6aa/spark-unsafe_2.12-3.2.4.jar) to constructor java.nio.DirectByteBuffer(long,int)
 [error] WARNING: Please consider reporting this to the maintainers of org.apache.spark.unsafe.Platform
 [error] WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
 [error] WARNING: All illegal access operations will be denied in a future release
-[error] 26/05/16 13:16:26 INFO SparkContext: Running Spark version 3.2.4
-[error] 26/05/16 13:16:26 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
-[error] 26/05/16 13:16:26 INFO ResourceUtils: ==============================================================
-[error] 26/05/16 13:16:26 INFO ResourceUtils: No custom resources configured for spark.driver.
-[error] 26/05/16 13:16:26 INFO ResourceUtils: ==============================================================
-[error] 26/05/16 13:16:26 INFO SparkContext: Submitted application: AI Divide - Developer Archetype Clustering
-[error] 26/05/16 13:16:26 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
-[error] 26/05/16 13:16:26 INFO ResourceProfile: Limiting resource is cpu
-[error] 26/05/16 13:16:26 INFO ResourceProfileManager: Added ResourceProfile id: 0
-[error] 26/05/16 13:16:26 INFO SecurityManager: Changing view acls to: firat
-[error] 26/05/16 13:16:26 INFO SecurityManager: Changing modify acls to: firat
-[error] 26/05/16 13:16:26 INFO SecurityManager: Changing view acls groups to: 
-[error] 26/05/16 13:16:26 INFO SecurityManager: Changing modify acls groups to: 
-[error] 26/05/16 13:16:26 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(firat); groups with view permissions: Set(); users  with modify permissions: Set(firat); groups with modify permissions: Set()
-[error] 26/05/16 13:16:27 INFO Utils: Successfully started service 'sparkDriver' on port 36647.
-[error] 26/05/16 13:16:27 INFO SparkEnv: Registering MapOutputTracker
-[error] 26/05/16 13:16:27 INFO SparkEnv: Registering BlockManagerMaster
-[error] 26/05/16 13:16:27 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
-[error] 26/05/16 13:16:27 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
-[error] 26/05/16 13:16:27 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
-[error] 26/05/16 13:16:27 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-9717095a-f1b9-4152-8a5c-457c27d5d778
-[error] 26/05/16 13:16:27 INFO MemoryStore: MemoryStore started with capacity 4.5 GiB
-[error] 26/05/16 13:16:27 INFO SparkEnv: Registering OutputCommitCoordinator
-[error] 26/05/16 13:16:27 INFO Utils: Successfully started service 'SparkUI' on port 4040.
-[error] 26/05/16 13:16:28 INFO SparkUI: Bound SparkUI to 0.0.0.0, and started at http://144.122.176.232:4040
-[error] 26/05/16 13:16:28 INFO Executor: Starting executor ID driver on host 144.122.176.232
-[error] 26/05/16 13:16:28 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 45963.
-[error] 26/05/16 13:16:28 INFO NettyBlockTransferService: Server created on 144.122.176.232:45963
-[error] 26/05/16 13:16:28 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
-[error] 26/05/16 13:16:28 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 144.122.176.232, 45963, None)
-[error] 26/05/16 13:16:28 INFO BlockManagerMasterEndpoint: Registering block manager 144.122.176.232:45963 with 4.5 GiB RAM, BlockManagerId(driver, 144.122.176.232, 45963, None)
-[error] 26/05/16 13:16:28 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 144.122.176.232, 45963, None)
-[error] 26/05/16 13:16:28 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, 144.122.176.232, 45963, None)
+[error] 26/05/16 14:27:22 INFO SparkContext: Running Spark version 3.2.4
+[error] 26/05/16 14:27:22 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[error] 26/05/16 14:27:22 INFO ResourceUtils: ==============================================================
+[error] 26/05/16 14:27:22 INFO ResourceUtils: No custom resources configured for spark.driver.
+[error] 26/05/16 14:27:22 INFO ResourceUtils: ==============================================================
+[error] 26/05/16 14:27:22 INFO SparkContext: Submitted application: AI Divide - Developer Archetype Clustering
+[error] 26/05/16 14:27:22 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+[error] 26/05/16 14:27:22 INFO ResourceProfile: Limiting resource is cpu
+[error] 26/05/16 14:27:22 INFO ResourceProfileManager: Added ResourceProfile id: 0
+[error] 26/05/16 14:27:22 INFO SecurityManager: Changing view acls to: firat
+[error] 26/05/16 14:27:22 INFO SecurityManager: Changing modify acls to: firat
+[error] 26/05/16 14:27:22 INFO SecurityManager: Changing view acls groups to: 
+[error] 26/05/16 14:27:22 INFO SecurityManager: Changing modify acls groups to: 
+[error] 26/05/16 14:27:22 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(firat); groups with view permissions: Set(); users  with modify permissions: Set(firat); groups with modify permissions: Set()
+[error] 26/05/16 14:27:23 INFO Utils: Successfully started service 'sparkDriver' on port 37881.
+[error] 26/05/16 14:27:23 INFO SparkEnv: Registering MapOutputTracker
+[error] 26/05/16 14:27:23 INFO SparkEnv: Registering BlockManagerMaster
+[error] 26/05/16 14:27:23 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+[error] 26/05/16 14:27:23 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+[error] 26/05/16 14:27:23 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+[error] 26/05/16 14:27:23 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-44fb0ef5-c487-4b79-8aee-e2a989e195f1
+[error] 26/05/16 14:27:23 INFO MemoryStore: MemoryStore started with capacity 4.5 GiB
+[error] 26/05/16 14:27:23 INFO SparkEnv: Registering OutputCommitCoordinator
+[error] 26/05/16 14:27:23 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+[error] 26/05/16 14:27:23 INFO SparkUI: Bound SparkUI to 0.0.0.0, and started at http://144.122.176.232:4040
+[error] 26/05/16 14:27:24 INFO Executor: Starting executor ID driver on host 144.122.176.232
+[error] 26/05/16 14:27:24 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 43343.
+[error] 26/05/16 14:27:24 INFO NettyBlockTransferService: Server created on 144.122.176.232:43343
+[error] 26/05/16 14:27:24 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+[error] 26/05/16 14:27:24 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 144.122.176.232, 43343, None)
+[error] 26/05/16 14:27:24 INFO BlockManagerMasterEndpoint: Registering block manager 144.122.176.232:43343 with 4.5 GiB RAM, BlockManagerId(driver, 144.122.176.232, 43343, None)
+[error] 26/05/16 14:27:24 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 144.122.176.232, 43343, None)
+[error] 26/05/16 14:27:24 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, 144.122.176.232, 43343, None)
 [info] Spark version: 3.2.4
 [info] Java version:  11.0.30
 [info] Raw row count: 65437
-[error] 26/05/16 13:16:42 WARN package: Truncated the string representation of a plan since it was too large. This behavior can be adjusted by setting 'spark.sql.debug.maxToStringFields'.
+[error] 26/05/16 14:27:35 WARN package: Truncated the string representation of a plan since it was too large. This behavior can be adjusted by setting 'spark.sql.debug.maxToStringFields'.
 [info] Clean row count: 13552
 [info] Feature vector size: 9
 [info] Feature columns: ai_select_int, ai_product_count, ai_task_count, ai_acc_int, ai_threat_int, ai_sent_int, ai_ben_count, years_code_pro, org_size_int
@@ -320,7 +318,7 @@
 [info]   org_size_int            ai_acc_int              +0.003
 [info]   org_size_int            ai_threat_int           +0.001
 [info] ── 14. LINEAR REGRESSION  salary ~ ai_use + experience + org_size ──
-[error] 26/05/16 13:17:49 WARN Instrumentation: [95fe712f] regParam is zero, which might cause numerical instability and overfitting.
+[error] 26/05/16 14:28:36 WARN Instrumentation: [be4941e2] regParam is zero, which might cause numerical instability and overfitting.
 [info]   Intercept       :    +22015.65 USD
 [info]   feature                  coefficient     std error    t-stat   p-value
 [info]   ------------------------------------------------------------------------
@@ -347,4 +345,4 @@
 [info]   Report complete.
 [info] ======================================================================
 [info] Pipeline complete.
-[success] Total time: 104 s (0:01:44.0), completed May 16, 2026, 1:17:55 PM
+[success] Total time: 81 s (0:01:21.0), completed May 16, 2026, 2:28:40 PM

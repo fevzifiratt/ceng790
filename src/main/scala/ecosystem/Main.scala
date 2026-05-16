@@ -1,4 +1,4 @@
-package divide
+package ecosystem
 
 import org.apache.spark.sql.SparkSession
 

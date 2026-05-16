@@ -841,7 +841,7 @@ reproducible from a single \texttt{sbt run} followed by
 cp survey_results_public.csv data/dataset.csv
 
 # 2. Build & run the pipeline (Java 11 required)
-JAVA_HOME=/usr/lib/jvm/jdk-11.0.30-oracle-x64 sbt "runMain divide.Main"
+JAVA_HOME=/usr/lib/jvm/jdk-11.0.30-oracle-x64 sbt "runMain ecosystem.Main"
 
 # 3. Generate the figures
 python3 -m venv .venv-plot && source .venv-plot/bin/activate
