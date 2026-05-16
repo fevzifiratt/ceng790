@@ -1,0 +1,31 @@
+[0m[[0m[0mdebug[0m] [0m[0mPackaging C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\aiecosystemclustering_2.12-0.1.0.jar ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ecosystem[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\classes\ecosystem[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ecosystem\Analysis$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\classes\ecosystem\Analysis$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ecosystem\Analysis.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\classes\ecosystem\Analysis.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ecosystem\Cleaning$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\classes\ecosystem\Cleaning$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ecosystem\Cleaning.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\classes\ecosystem\Cleaning.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ecosystem\Clustering$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\classes\ecosystem\Clustering$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ecosystem\Clustering.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\classes\ecosystem\Clustering.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ecosystem\Features$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\classes\ecosystem\Features$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ecosystem\Features.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\classes\ecosystem\Features.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ecosystem\Main$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\classes\ecosystem\Main$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ecosystem\Main$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\classes\ecosystem\Main$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ecosystem\Main.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\classes\ecosystem\Main.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ecosystem\OptimalK$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\classes\ecosystem\OptimalK$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ecosystem\OptimalK.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\classes\ecosystem\OptimalK.class[0m
+[0m[[0m[0mdebug[0m] [0m[0mDone packaging.[0m
