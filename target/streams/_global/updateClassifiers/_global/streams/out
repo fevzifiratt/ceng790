@@ -1,3 +1,4 @@
-[debug] not up to date. inChanged = true, force = false
-[debug] Updating ProjectRef(uri("file:/C:/Users/Lenovo/Desktop/AIEcosystem/"), "aiecosystem")...
-[debug] Done updating ProjectRef(uri("file:/C:/Users/Lenovo/Desktop/AIEcosystem/"), "aiecosystem")
+[warn] scala-library-2.12.17-sources.jar no longer exists at /C:/Users/Lenovo/AppData/Local/Coursier/Cache/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.12.17/scala-library-2.12.17-sources.jar
+[debug] not up to date. inChanged = false, force = false
+[debug] Updating ProjectRef(uri("file:/home/firat/IdeaProjects/CENG790/"), "ceng790")...
+[debug] Done updating ProjectRef(uri("file:/home/firat/IdeaProjects/CENG790/"), "ceng790")

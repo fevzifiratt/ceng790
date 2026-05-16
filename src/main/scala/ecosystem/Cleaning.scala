@@ -3,24 +3,23 @@ package divide
 import org.apache.spark.sql.DataFrame
 import org.apache.spark.sql.functions._
 
+/**
+ * Cleans the raw Stack Overflow 2024 Developer Survey CSV.
+ *
+ * IMPORTANT (2024 schema notes):
+ *   - The column with AI tool products is `AISearchDevHaveWorkedWith`,
+ *     NOT `AIToolCurrentlyUsing`.
+ *   - The column `AIToolCurrently Using` (with a space!) lists the
+ *     ACTIVITIES the developer uses AI for (writing code, debugging, …).
+ *   - `JobSat` is a numeric 0–10 score, not text labels.
+ *   - `AIBen` is a multi-value semicolon list of perceived benefits,
+ *     not a single sentiment label.
+ */
 object Cleaning {
 
-  /**
-   * Cleans the raw Stack Overflow survey CSV.
-   *
-   * Steps:
-   *  1. Select only the columns we actually need
-   *  2. Drop rows where critical outcome variables are null
-   *  3. Cast salary to Double (it comes in as String due to commas / NAs)
-   *  4. Cast YearsCodePro to Int  (survey uses "More than 50 years" / "Less than 1 year" special strings)
-   *  5. Encode OrgSize as an ordinal integer (1 = solo, 7 = 10k+)
-   *  6. Drop any remaining nulls in clustering features
-   */
   def clean(df: DataFrame): DataFrame = {
 
-    import df.sparkSession.implicits._
-
-    // ── 1. Select relevant columns ──────────────────────────────────────────
+    // ── 1. Select relevant columns ───────────────────────────────────────────
     val selected = df.select(
       col("ResponseId"),
       col("AISelect"),
@@ -29,7 +28,8 @@ object Cleaning {
       col("AIComplex"),
       col("AIThreat"),
       col("AIBen"),
-      col("AIToolCurrentlyUsing"),
+      col("AIToolCurrently Using").as("AIToolActivities"),
+      col("AISearchDevHaveWorkedWith").as("AIProducts"),
       col("LanguageHaveWorkedWith"),
       col("OrgSize"),
       col("YearsCodePro"),
@@ -37,29 +37,32 @@ object Cleaning {
       col("JobSat"),
       col("Country"),
       col("DevType"),
-      col("Employment")
+      col("Employment"),
+      col("RemoteWork"),
+      col("MainBranch")
     )
 
     // ── 2. Keep only full-time employed developers ──────────────────────────
     val employed = selected.filter(
-      col("Employment").contains("Employed, full-time")
+      col("Employment").isNotNull &&
+        col("Employment").contains("Employed, full-time")
     )
 
-    // ── 3. Drop rows with null outcome variables ────────────────────────────
+    // ── 3. Drop rows with null critical outcomes ────────────────────────────
     val nonNullOutcomes = employed
       .filter(col("ConvertedCompYearly").isNotNull)
       .filter(col("JobSat").isNotNull)
       .filter(col("AISelect").isNotNull)
 
-    // ── 4. Cast salary ──────────────────────────────────────────────────────
+    // ── 4. Cast salary to Double, remove outliers ───────────────────────────
     val withSalary = nonNullOutcomes
-      .withColumn("salary_usd",
-        col("ConvertedCompYearly").cast("double"))
-      .filter(col("salary_usd") > 5000)      // remove implausible values
-      .filter(col("salary_usd") < 1000000)   // remove outliers
+      .withColumn("salary_usd", col("ConvertedCompYearly").cast("double"))
+      .filter(col("salary_usd").isNotNull)
+      .filter(col("salary_usd") > 5000)
+      .filter(col("salary_usd") < 1000000)
 
     // ── 5. Normalise YearsCodePro ───────────────────────────────────────────
-    //   Survey has "More than 50 years" and "Less than 1 year" as strings
+    //   2024 file still uses "More than 50 years" / "Less than 1 year"
     val withYears = withSalary
       .withColumn("years_code_pro",
         when(col("YearsCodePro") === "More than 50 years", 50)
@@ -68,7 +71,8 @@ object Cleaning {
       )
       .filter(col("years_code_pro").isNotNull)
 
-    // ── 6. Encode OrgSize as ordinal integer ────────────────────────────────
+    // ── 6. Encode OrgSize as ordinal integer (1–9) ─────────────────────────
+    //   "I don't know" → null → dropped
     val withOrgSize = withYears
       .withColumn("org_size_int",
         when(col("OrgSize") === "Just me - I am a freelancer, sole proprietor, etc.", 1)
@@ -84,51 +88,62 @@ object Cleaning {
       )
       .filter(col("org_size_int").isNotNull)
 
-    // ── 7. Encode JobSat as numeric ─────────────────────────────────────────
+    // ── 7. Cast JobSat (0–10 numeric in 2024) ──────────────────────────────
     val withJobSat = withOrgSize
-      .withColumn("job_sat_int",
-        when(col("JobSat") === "Very satisfied",       5)
-          .when(col("JobSat") === "Slightly satisfied",  4)
-          .when(col("JobSat") === "Neither satisfied nor dissatisfied", 3)
-          .when(col("JobSat") === "Slightly dissatisfied", 2)
-          .when(col("JobSat") === "Very dissatisfied",    1)
-          .otherwise(null)
-      )
+      .withColumn("job_sat_int", col("JobSat").cast("int"))
       .filter(col("job_sat_int").isNotNull)
+      .filter(col("job_sat_int") >= 0 && col("job_sat_int") <= 10)
 
-    // ── 8. Encode AISelect as numeric ───────────────────────────────────────
+    // ── 8. Encode AISelect as numeric (2024 wording) ───────────────────────
     val withAISelect = withJobSat
       .withColumn("ai_select_int",
-        when(col("AISelect") === "I use it myself",              3)
-          .when(col("AISelect") === "I use it at work",           2)  // older survey wording
-          .when(col("AISelect") === "No, but I plan to soon",     1)
-          .when(col("AISelect") === "No, and I don't plan to",    0)
+        when(col("AISelect") === "Yes",                       2)
+          .when(col("AISelect") === "No, but I plan to soon", 1)
+          .when(col("AISelect") === "No, and I don't plan to", 0)
           .otherwise(null)
       )
       .filter(col("ai_select_int").isNotNull)
 
-    // ── 9. Encode AI sentiment columns ──────────────────────────────────────
+    // ── 9. Encode AI sentiment / trust / threat ────────────────────────────
     val withSentiment = withAISelect
       .withColumn("ai_acc_int",
-        when(col("AIAcc") === "Highly trust",     4)
-          .when(col("AIAcc") === "Somewhat trust",  3)
-          .when(col("AIAcc") === "Indifferent",     2)
-          .when(col("AIAcc") === "Somewhat distrust", 1)
-          .when(col("AIAcc") === "Highly distrust", 0)
-          .otherwise(2)   // default to indifferent if null
+        when(col("AIAcc") === "Highly trust",                4)
+          .when(col("AIAcc") === "Somewhat trust",           3)
+          .when(col("AIAcc") === "Neither trust nor distrust", 2)
+          .when(col("AIAcc") === "Somewhat distrust",        1)
+          .when(col("AIAcc") === "Highly distrust",          0)
+          .otherwise(2)
       )
       .withColumn("ai_threat_int",
-        when(col("AIThreat") === "Yes", 1)
-          .when(col("AIThreat") === "No",  0)
+        when(col("AIThreat") === "Yes",            2)
+          .when(col("AIThreat") === "I'm not sure", 1)
+          .when(col("AIThreat") === "No",          0)
           .otherwise(0)
       )
-      .withColumn("ai_ben_int",
-        when(col("AIBen") === "Mostly positive", 2)
-          .when(col("AIBen") === "Indifferent",    1)
-          .when(col("AIBen") === "Mostly negative", 0)
-          .otherwise(1)
+      .withColumn("ai_sent_int",
+        when(col("AISent") === "Very favorable",   4)
+          .when(col("AISent") === "Favorable",     3)
+          .when(col("AISent") === "Indifferent",   2)
+          .when(col("AISent") === "Unsure",        2)
+          .when(col("AISent") === "Unfavorable",   1)
+          .when(col("AISent") === "Very unfavorable", 0)
+          .otherwise(2)
       )
 
-    withSentiment
+    // ── 10. AIBen → number of perceived benefits (0..N) ────────────────────
+    //   Multi-value semicolon list. Drop "Other (please specify):" noise.
+    val withBenefit = withSentiment
+      .withColumn("ai_ben_count",
+        when(col("AIBen").isNull || col("AIBen") === "NA", lit(0))
+          .otherwise(
+            size(
+              expr(
+                "filter(split(AIBen, ';'), x -> x != 'Other (please specify):' AND x != '')"
+              )
+            )
+          )
+      )
+
+    withBenefit
   }
 }

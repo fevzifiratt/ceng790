@@ -5,20 +5,23 @@ import org.apache.spark.sql.functions._
 import org.apache.spark.ml.clustering.KMeans
 import org.apache.spark.ml.evaluation.ClusteringEvaluator
 
+/**
+ * Trains the final K-Means model with the chosen k and assigns
+ * human-readable archetype labels to each cluster.
+ *
+ * Feature index map (set by Features.scala, base block):
+ *   0 ai_select_int
+ *   1 ai_product_count
+ *   2 ai_task_count
+ *   3 ai_acc_int
+ *   4 ai_threat_int
+ *   5 ai_sent_int
+ *   6 ai_ben_count
+ *   7 years_code_pro
+ *   8 org_size_int
+ */
 object Clustering {
 
-  /**
-   * Trains the final K-Means model with the chosen k.
-   *
-   * Returns the input DataFrame augmented with:
-   *   - prediction     : raw cluster id (0 to k-1)
-   *   - archetype      : human-readable label derived from cluster centroid analysis
-   *
-   * Archetype labelling logic:
-   *   After clustering, we inspect each centroid's ai_select_int and ai_tool_count
-   *   (positions 0 and 1 in the feature vector) to assign a meaningful label.
-   *   Adjust the thresholds below if your data distribution differs.
-   */
   def trainFinal(df: DataFrame, k: Int): DataFrame = {
 
     println(s"\nTraining final K-Means model with k=$k ...")
@@ -28,22 +31,26 @@ object Clustering {
       .setSeed(42L)
       .setFeaturesCol("features")
       .setPredictionCol("prediction")
-      .setMaxIter(40)     // more iterations for final model
+      .setMaxIter(40)
 
     val model       = kmeans.fit(df)
     val predictions = model.transform(df)
 
-    // ── Print centroid summary ─────────────────────────────────────────────
-    println("\nCluster centroids (first 7 features: ai_select, tool_count, ai_acc, ai_threat, ai_ben, years_exp, org_size):")
-    println(f"${"Cluster"}%10s  ${"ai_select"}%10s  ${"tool_count"}%10s  ${"ai_acc"}%8s  ${"years_exp"}%10s  ${"org_size"}%10s")
-    println("-" * 70)
+    // ── Centroid summary on the most discriminating features ──────────────
+    println(
+      "\nCluster centroids (z-scores on key features):"
+    )
+    println(f"${"Cluster"}%8s  ${"ai_sel"}%8s  ${"prod"}%8s  ${"task"}%8s  " +
+            f"${"acc"}%8s  ${"threat"}%8s  ${"sent"}%8s  ${"ben"}%8s  " +
+            f"${"years"}%8s  ${"orgSz"}%8s")
+    println("-" * 100)
 
-    model.clusterCenters.zipWithIndex.foreach { case (center, idx) =>
-      // center is a normalised z-score vector; raw magnitudes indicate direction
-      println(f"  C$idx%2d       ${center(0)}%10.3f  ${center(1)}%10.3f  ${center(2)}%8.3f  ${center(5)}%10.3f  ${center(6)}%10.3f")
+    model.clusterCenters.zipWithIndex.foreach { case (c, idx) =>
+      println(f"  C$idx%2d     " +
+        f"${c(0)}%8.3f  ${c(1)}%8.3f  ${c(2)}%8.3f  ${c(3)}%8.3f  " +
+        f"${c(4)}%8.3f  ${c(5)}%8.3f  ${c(6)}%8.3f  ${c(7)}%8.3f  ${c(8)}%8.3f")
     }
 
-    // ── Silhouette score for final model ───────────────────────────────────
     val evaluator = new ClusteringEvaluator()
       .setFeaturesCol("features")
       .setPredictionCol("prediction")
@@ -52,38 +59,31 @@ object Clustering {
     val silhouette = evaluator.evaluate(predictions)
     println(f"\nFinal model Silhouette Score: $silhouette%.4f")
 
-    // ── Assign archetype labels ────────────────────────────────────────────
-    //   We derive labels from each centroid's z-score on the two most
-    //   discriminating features: ai_select_int (pos 0) and ai_tool_count (pos 1).
-    //   High positive z-score = above average adoption.
-    //
-    //   These thresholds work for k=4. If you change k, re-run and relabel.
-    val clusterLabels: Map[Int, String] = model.clusterCenters.zipWithIndex.map {
-      case (center, idx) =>
-        val adoption  = center(0)   // z-score of ai_select_int
-        val toolCount = center(1)   // z-score of ai_tool_count
-        val trust     = center(2)   // z-score of ai_acc_int
-        val yearsExp  = center(5)   // z-score of years_code_pro
+    // ── Archetype labelling: rank clusters by ai_product_count (idx 1) ────
+    //   This is generic — works for any k. Lowest AI use → "Traditional",
+    //   highest → "Power User", middle ones → "Experimenter" with a rank.
+    val centersByAdoption = model.clusterCenters.zipWithIndex
+      .sortBy { case (c, _) => c(1) }   // ascending by ai_product_count z-score
 
-        val label = (adoption, toolCount) match {
-          case (a, t) if a > 0.4 && t > 0.4  => "AI Power User"
-          case (a, t) if a > 0.0 && t >= 0.0 => "AI Experimenter"
-          case (a, _) if a < -0.2 && yearsExp > 0.3 => "Experienced Skeptic"
-          case _                               => "Traditional Engineer"
-        }
-        idx -> label
+    val labels = centersByAdoption.zipWithIndex.map { case ((_, clusterId), rank) =>
+      val label = (rank, centersByAdoption.length) match {
+        case (0, _)                            => "Traditional Engineer"
+        case (r, n) if r == n - 1              => "AI Power User"
+        case (r, n) if n == 3 && r == 1        => "AI Experimenter"
+        case (r, n) if r == 1                  => "Light AI User"
+        case (r, _)                            => s"AI Experimenter (tier $r)"
+      }
+      clusterId -> label
     }.toMap
 
-    println("\nDerived archetype labels:")
-    clusterLabels.toSeq.sortBy(_._1).foreach { case (id, label) =>
+    println("\nDerived archetype labels (ranked by AI product use):")
+    labels.toSeq.sortBy(_._1).foreach { case (id, label) =>
       println(s"  Cluster $id → $label")
     }
 
-    // ── Apply labels via UDF ──────────────────────────────────────────────
-    val labelUdf = udf((clusterId: Int) => clusterLabels.getOrElse(clusterId, s"Cluster $clusterId"))
+    val labelUdf = udf((clusterId: Int) =>
+      labels.getOrElse(clusterId, s"Cluster $clusterId"))
 
-    val labelled = predictions.withColumn("archetype", labelUdf(col("prediction")))
-
-    labelled
+    predictions.withColumn("archetype", labelUdf(col("prediction")))
   }
 }

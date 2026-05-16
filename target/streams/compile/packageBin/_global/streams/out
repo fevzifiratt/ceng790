@@ -1,31 +1,41 @@
-[0m[[0m[0mdebug[0m] [0m[0mPackaging C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\aiecosystemclustering_2.12-0.1.0.jar ...[0m
-[0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	ecosystem[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\classes\ecosystem[0m
-[0m[[0m[0mdebug[0m] [0m[0m	ecosystem\Analysis$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\classes\ecosystem\Analysis$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	ecosystem\Analysis.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\classes\ecosystem\Analysis.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	ecosystem\Cleaning$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\classes\ecosystem\Cleaning$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	ecosystem\Cleaning.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\classes\ecosystem\Cleaning.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	ecosystem\Clustering$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\classes\ecosystem\Clustering$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	ecosystem\Clustering.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\classes\ecosystem\Clustering.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	ecosystem\Features$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\classes\ecosystem\Features$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	ecosystem\Features.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\classes\ecosystem\Features.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	ecosystem\Main$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\classes\ecosystem\Main$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	ecosystem\Main$delayedInit$body.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\classes\ecosystem\Main$delayedInit$body.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	ecosystem\Main.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\classes\ecosystem\Main.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	ecosystem\OptimalK$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\classes\ecosystem\OptimalK$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	ecosystem\OptimalK.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Lenovo\Desktop\AIEcosystem\target\scala-2.12\classes\ecosystem\OptimalK.class[0m
-[0m[[0m[0mdebug[0m] [0m[0mDone packaging.[0m
+[debug] Packaging /home/firat/IdeaProjects/CENG790/target/scala-2.12/aiecosystemclustering_2.12-0.1.0.jar ...
+[debug] Input file mappings:
+[debug] 	divide
+[debug] 	  /home/firat/IdeaProjects/CENG790/target/scala-2.12/classes/divide
+[debug] 	divide/Main$delayedInit$body.class
+[debug] 	  /home/firat/IdeaProjects/CENG790/target/scala-2.12/classes/divide/Main$delayedInit$body.class
+[debug] 	divide/Main$.class
+[debug] 	  /home/firat/IdeaProjects/CENG790/target/scala-2.12/classes/divide/Main$.class
+[debug] 	divide/Analysis$$typecreator20$1.class
+[debug] 	  /home/firat/IdeaProjects/CENG790/target/scala-2.12/classes/divide/Analysis$$typecreator20$1.class
+[debug] 	divide/Features$.class
+[debug] 	  /home/firat/IdeaProjects/CENG790/target/scala-2.12/classes/divide/Features$.class
+[debug] 	divide/Analysis$$typecreator10$1.class
+[debug] 	  /home/firat/IdeaProjects/CENG790/target/scala-2.12/classes/divide/Analysis$$typecreator10$1.class
+[debug] 	divide/Analysis$.class
+[debug] 	  /home/firat/IdeaProjects/CENG790/target/scala-2.12/classes/divide/Analysis$.class
+[debug] 	divide/OptimalK.class
+[debug] 	  /home/firat/IdeaProjects/CENG790/target/scala-2.12/classes/divide/OptimalK.class
+[debug] 	divide/Clustering.class
+[debug] 	  /home/firat/IdeaProjects/CENG790/target/scala-2.12/classes/divide/Clustering.class
+[debug] 	divide/Clustering$.class
+[debug] 	  /home/firat/IdeaProjects/CENG790/target/scala-2.12/classes/divide/Clustering$.class
+[debug] 	divide/Cleaning$.class
+[debug] 	  /home/firat/IdeaProjects/CENG790/target/scala-2.12/classes/divide/Cleaning$.class
+[debug] 	divide/Analysis$$typecreator14$1.class
+[debug] 	  /home/firat/IdeaProjects/CENG790/target/scala-2.12/classes/divide/Analysis$$typecreator14$1.class
+[debug] 	divide/Main.class
+[debug] 	  /home/firat/IdeaProjects/CENG790/target/scala-2.12/classes/divide/Main.class
+[debug] 	divide/Analysis.class
+[debug] 	  /home/firat/IdeaProjects/CENG790/target/scala-2.12/classes/divide/Analysis.class
+[debug] 	divide/Features.class
+[debug] 	  /home/firat/IdeaProjects/CENG790/target/scala-2.12/classes/divide/Features.class
+[debug] 	divide/Clustering$$typecreator1$1.class
+[debug] 	  /home/firat/IdeaProjects/CENG790/target/scala-2.12/classes/divide/Clustering$$typecreator1$1.class
+[debug] 	divide/Analysis$$typecreator24$1.class
+[debug] 	  /home/firat/IdeaProjects/CENG790/target/scala-2.12/classes/divide/Analysis$$typecreator24$1.class
+[debug] 	divide/Cleaning.class
+[debug] 	  /home/firat/IdeaProjects/CENG790/target/scala-2.12/classes/divide/Cleaning.class
+[debug] 	divide/OptimalK$.class
+[debug] 	  /home/firat/IdeaProjects/CENG790/target/scala-2.12/classes/divide/OptimalK$.class
+[debug] Done packaging.

@@ -1,17 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0mC:\Users\Lenovo\Desktop\AIEcosystem\src\main\scala\ecosystem\Cleaning.scala:29:11: overloaded method value drop with alternatives:[0m
-[0m[[0m[31merror[0m] [0m[0m  (minNonNulls: Int,cols: Seq[String])org.apache.spark.sql.DataFrame <and>[0m
-[0m[[0m[31merror[0m] [0m[0m  (minNonNulls: Int,cols: Array[String])org.apache.spark.sql.DataFrame <and>[0m
-[0m[[0m[31merror[0m] [0m[0m  (minNonNulls: Int)org.apache.spark.sql.DataFrame <and>[0m
-[0m[[0m[31merror[0m] [0m[0m  (how: String,cols: Seq[String])org.apache.spark.sql.DataFrame <and>[0m
-[0m[[0m[31merror[0m] [0m[0m  (how: String,cols: Array[String])org.apache.spark.sql.DataFrame <and>[0m
-[0m[[0m[31merror[0m] [0m[0m  (cols: Seq[String])org.apache.spark.sql.DataFrame <and>[0m
-[0m[[0m[31merror[0m] [0m[0m  (cols: Array[String])org.apache.spark.sql.DataFrame <and>[0m
-[0m[[0m[31merror[0m] [0m[0m  (how: String)org.apache.spark.sql.DataFrame <and>[0m
-[0m[[0m[31merror[0m] [0m[0m  ()org.apache.spark.sql.DataFrame[0m
-[0m[[0m[31merror[0m] [0m[0m cannot be applied to (subset: Seq[String])[0m
-[0m[[0m[31merror[0m] [0m[0m      .na.drop(subset = allRequired)[0m
-[0m[[0m[31merror[0m] [0m[0m          ^[0m
-[0m[[0m[31merror[0m] [0m[0mC:\Users\Lenovo\Desktop\AIEcosystem\src\main\scala\ecosystem\Cleaning.scala:43:16: not found: value subset[0m
-[0m[[0m[31merror[0m] [0m[0m      .na.drop(subset = allRequired)[0m
-[0m[[0m[31merror[0m] [0m[0m               ^[0m
-[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
+[error] /home/firat/IdeaProjects/CENG790/src/main/scala/ecosystem/Analysis.scala:374:53: Illegal flag '+'
+[error]     println(f"  ${"feature"}%-20s  ${"coefficient"}%+14s  ${"std error"}%12s  ${"t-stat"}%8s  ${"p-value"}%8s")
+[error]                                                     ^
+[error] one error found
